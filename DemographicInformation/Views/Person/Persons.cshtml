@@ -1,0 +1,87 @@
+﻿@model IEnumerable<DemographicInformation.Models.Person>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Persons</title>
+</head>
+<body>
+    <div class="container">
+        <br />
+        <div class="row">
+            <div class="col-md-12 text-center text-capitalize">
+                <h1>List of Persons</h1>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <table class="display compact" style="width:100%" id="persons">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="dt-head-center">
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th class="dt-head-center">
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th class="dt-head-center">
+                                @Html.DisplayNameFor(model => model.Phone)
+                            </th>
+                            <th class="dt-head-center">
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="dt-body-center">
+                                <input type="checkbox" id="chkPerson" onchange="allowDelete();" name=@item.Id>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Phone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                <input value="View" class="btn btn-primary btn-sm " onclick="viewPersonDetails('View Person', '@item.Id', 0)" />
+                            </td>
+                            <td>
+                                <input value="Edit" class="btn btn-default btn-sm " onclick="viewPersonDetails('Update Person', '@item.Id', 1)" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-8 col-md-offset-4">
+                <input value="Add New Person" class="btn btn-sm btn-primary" onclick="viewPersonDetails('Create Person', '-1', 3)" />
+                <input value="Delete Selected" class="btn btn-default btn-sm deletePerson" onclick="deleteSelected()" disabled />
+            </div>
+        </div>
+        <div id="personPopup" style="display:none"></div>
+    </div>
+</body>
+</html>
+
+@section Scripts {
+    <script type="text/javascript">
+        $('#persons').DataTable();
+    </script>
+}
