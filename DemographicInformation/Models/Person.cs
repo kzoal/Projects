@@ -17,10 +17,11 @@ namespace DemographicInformation.Models
 
         [Required]
         [StringLength(100, ErrorMessage = "maximum {1} characters allowed in email.")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [EmailAddress(ErrorMessage = "Invalid email address.")]
         public string Email { get; set; }
 
-        [StringLength(30, ErrorMessage = "maximum {1} characters allowed in phone.")]        
+        [StringLength(30, ErrorMessage = "maximum {1} characters allowed in phone.")]
+        [Phone(ErrorMessage = "Invalid phone number.")]
         public string Phone { get; set; }
 
         [StringLength(2500, ErrorMessage = "maximum {1} characters allowed in address.")]
